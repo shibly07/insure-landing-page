@@ -1,0 +1,161 @@
+@use "colors" as colors;
+@use "mixins" as *;
+@use "global";
+
+.footer {
+  @extend .container;
+  position: relative;
+
+  background: #fafafa;
+  padding-top: toRem(85);
+
+  @include breakpoint-up(desktop) {
+    padding-top: toRem(65);
+  }
+
+  &::before {
+    position: absolute;
+    content: "";
+    background-image: url(../../images/bg-pattern-footer-mobile.svg);
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0%;
+
+    @include breakpoint-up(desktop) {
+      background-image: url(../../images/bg-pattern-footer-desktop.svg);
+    }
+  }
+
+  &__nav {
+    position: relative;
+
+    &-logo {
+      background-image: url(../../images/logo.svg);
+      background-repeat: no-repeat;
+      height: toRem(20);
+      width: 100%;
+      background-position: center;
+
+      @include breakpoint-up(desktop) {
+        background-position: left;
+      }
+    }
+
+    &-icons {
+      @extend .flex, .flex-jc-c;
+      padding-top: toRem(30);
+      padding-bottom: toRem(40);
+
+      $icons: ("facebook", "twitter", "pinterest", "instagram");
+      @each $icon in $icons {
+        .icon-#{$icon} {
+          background-image: url(../../images/icon-#{$icon}.svg);
+          background-repeat: no-repeat;
+          height: toRem(25);
+          width: toRem(25);
+          display: inline-block;
+          margin-left: toRem(15);
+          transition: all 300ms ease-in-out;
+
+          @include breakpoint-up(desktop) {
+            &:hover {
+              filter: brightness(0.1);
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+
+    @include breakpoint-up(desktop) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      display: block;
+      height: toRem(1);
+      width: 100%;
+      background-color: colors.$darkGrayishViolet;
+
+      @include breakpoint-up(desktop) {
+        bottom: toRem(-35);
+      }
+    }
+
+    @include breakpoint-up(desktop) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__links {
+    @include breakpoint-down(tablet) {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    @include breakpoint-up(desktop) {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    &-container {
+      h3 {
+        color: colors.$darkGrayishViolet;
+        padding-top: toRem(40);
+        padding-bottom: toRem(30);
+
+        @include breakpoint-up(desktop) {
+          padding-top: toRem(85);
+        }
+      }
+      ul {
+        list-style-type: none;
+        li {
+          padding-top: toRem(10);
+          padding-bottom: toRem(10);
+          a {
+            position: relative;
+            color: colors.$darkViolet;
+            text-transform: uppercase;
+            font-weight: bold;
+
+            @include breakpoint-up(desktop) {
+              &::after {
+                position: absolute;
+                content: "";
+                display: block;
+                background-color: colors.$darkViolet;
+                height: toRem(1);
+                width: 0%;
+                transition: all 300ms ease-in-out;
+              }
+
+              &:hover::after {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .attribution {
+    padding-top: toRem(90);
+    padding-bottom: toRem(20);
+    font-size: toRem(15);
+    font-size: toRem(11);
+    text-align: center;
+
+    a {
+      color: hsl(228, 45%, 44%);
+    }
+  }
+}

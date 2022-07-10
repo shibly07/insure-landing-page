@@ -1,0 +1,167 @@
+@use "colors" as colors;
+@use "mixins" as *;
+@use "global";
+
+.information {
+  @extend .container;
+
+  &__different {
+    margin-top: toRem(140);
+
+    @include breakpoint-down(tablet) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    @include breakpoint-up(desktop) {
+      margin-top: toRem(300);
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      background: colors.$darkGrayishViolet;
+      width: toRem(150);
+      height: toRem(3);
+    }
+
+    &-title {
+      font-family: "DM Serif Display", serif;
+      font-size: toRem(35);
+      padding-top: toRem(50);
+      padding-bottom: toRem(85);
+
+      @include breakpoint-up(desktop) {
+        padding-top: toRem(70);
+        padding-bottom: toRem(100);
+      }
+    }
+
+    &-cards {
+      h3 {
+        font-size: toRem(20);
+        padding-top: toRem(40);
+        padding-bottom: toRem(35);
+
+        @include breakpoint-up(desktop) {
+          padding-bottom: toRem(30);
+        }
+      }
+
+      p {
+        line-height: 1.5;
+      }
+
+      @include breakpoint-up(desktop) {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: toRem(55);
+      }
+
+      .card {
+        padding-bottom: toRem(65);
+
+        @include breakpoint-up(desktop) {
+          padding-bottom: toRem(165);
+        }
+
+        $icons: ("snappy-process", "affordable-prices", "people-first");
+
+        @each $icon in $icons {
+          &.#{$icon} {
+            .#{$icon}-icon {
+              background-image: url(../../images/icon-#{$icon}.svg);
+              background-repeat: no-repeat;
+              background-position: center;
+              height: toRem(90);
+              width: 100%;
+
+              @include breakpoint-up(desktop) {
+                background-position: left;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__work {
+    position: relative;
+    background-color: colors.$darkViolet;
+    height: toRem(345);
+    width: 100%;
+    color: white;
+    text-align: center;
+    margin-bottom: toRem(150);
+
+    &-title {
+      padding-top: toRem(80);
+      font-family: "DM Serif Display", serif;
+      font-size: toRem(30);
+      padding-left: toRem(45);
+      padding-right: toRem(45);
+
+      display: flex;
+      flex-direction: column;
+
+      &::before {
+        content: "";
+        position: absolute;
+        background-image: url(../../images/bg-pattern-how-we-work-mobile.svg);
+        background-repeat: no-repeat;
+        height: 100%;
+        width: 100%;
+        background-position: right toRem(45) bottom toRem(10);
+        top: -5%;
+      }
+
+      @include breakpoint-up(desktop) {
+        padding-top: 0;
+        font-size: toRem(40);
+        max-width: toRem(440);
+        text-align: left;
+
+        &::before {
+          background-image: url(../../images/bg-pattern-how-we-work-desktop.svg);
+          top: 2%;
+          background-size: contain;
+        }
+      }
+    }
+
+    &-button {
+      margin-top: toRem(45);
+      width: toRem(160);
+      height: toRem(40);
+      font-weight: bold;
+      background-color: colors.$darkViolet;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: toRem(1);
+      border: toRem(1) solid white;
+      z-index: 1;
+      cursor: pointer;
+      transition: all 300ms ease-in-out;
+
+      @include breakpoint-up(desktop) {
+        margin-top: 0;
+        margin-right: toRem(80);
+
+        &:hover {
+          background: white;
+          color: colors.$darkViolet;
+        }
+      }
+    }
+
+    @include breakpoint-up(desktop) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: toRem(250);
+    }
+  }
+}

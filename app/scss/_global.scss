@@ -1,0 +1,58 @@
+@use "mixins" as *;
+
+html {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Karla", sans-serif;
+  font-size: toRem(16);
+  overflow-x: hidden;
+
+  &.noscroll {
+    overflow-y: hidden;
+  }
+}
+
+.flex {
+  display: flex;
+
+  &-jc-sb {
+    justify-content: space-between;
+  }
+
+  &-jc-c {
+    justify-content: center;
+  }
+
+  &-ai-c {
+    align-items: center;
+  }
+}
+
+.container {
+  padding-left: toRem(24);
+  padding-right: toRem(24);
+
+  @include breakpoint-up(tablet) {
+    padding-left: toRem(60);
+    padding-right: toRem(60);
+  }
+
+  @include breakpoint-up(desktop) {
+    padding-left: toRem(165);
+    padding-right: toRem(165);
+  }
+}
+
+.hide-for-desktop {
+  @include breakpoint-up(desktop) {
+    display: none;
+  }
+}
+
+.hide-for-mobile {
+  @include breakpoint-down(tablet) {
+    display: none;
+  }
+}
